@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookstore - Customer Survey</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f7; padding: 20px; color: #2c3e50; }
+        .survey-container { max-width: 600px; background: white; margin: 0 auto; padding: 35px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #2c3e50; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; }
+        .form-group input[type="text"], .form-group select, .form-group textarea { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 14px; }
+        .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 10px; padding-top: 5px; }
+        .radio-group label, .checkbox-group label { font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .btn-submit { background-color: #27ae60; color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px; }
+        .btn-submit:hover { background-color: #219653; }
+    </style>
+</head>
+<body>
+
+<div class="survey-container">
+    <h2>Bookstore Feedback Survey</h2>
+    <p class="subtitle">Help us improve your reading and purchasing experience!</p>
+    
+    <form action="#" method="POST">
+        <!-- 1. Text Field Input -->
+        <div class="form-group">
+            <label for="fav-author">Who is your favorite author?</label>
+            <input type="text" id="fav-author" name="favAuthor" placeholder="e.g., James Clear" required>
+        </div>
+
+        <!-- 2. Dropdown Select Selection -->
+        <div class="form-group">
+            <label for="visit-frequency">How often do you visit our online store?</label>
+            <select id="visit-frequency" name="visitFrequency" required>
+                <option value="">Select an option</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="rarely">Rarely</option>
+            </select>
+        </div>
+
+        <!-- 3. Radio Buttons Selection (Single Option) -->
+        <div class="form-group">
+            <label>Would you recommend our bookstore to a classmate?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="recommend" value="yes" checked> Yes, absolutely</label>
+                <label><input type="radio" name="recommend" value="maybe"> Maybe</label>
+                <label><input type="radio" name="recommend" value="no"> No</label>
+            </div>
+        </div>
+
+        <!-- 4. Checkboxes Selection (Multiple Options) -->
+        <div class="form-group">
+            <label>Which genres are you most interested in? (Select all that apply)</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="genres" value="engineering"> Engineering & Tech</label>
+                <label><input type="checkbox" name="genres" value="fiction"> Fiction & Literature</label>
+                <label><input type="checkbox" name="genres" value="sci-fi"> Science Fiction</label>
+                <label><input type="checkbox" name="genres" value="biographies"> Biographies</label>
+            </div>
+        </div>
+
+        <!-- 5. Large Textarea Field -->
+        <div class="form-group">
+            <label for="suggestions">Any additional suggestions or features you want added?</label>
+            <textarea id="suggestions" name="suggestions" rows="4" placeholder="Write your feedback here..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Survey Feedback</button>
+    </form>
+</div>
+
+</body>
+</html>

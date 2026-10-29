@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore - Dynamic CSS Theme Engine</title>
+    <style>
+        /* ========================================================
+           BASE CORE ENGINE (Required structural CSS)
+           ======================================================== */
+        body { 
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 95vh;
+            transition: all 0.4s ease-in-out; /* Makes background transition smooth */
+        }
+
+        /* Glassmorphism content layout wrapper card */
+        .showcase-card {
+            background-color: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(8px);
+            padding: 35px;
+            border-radius: 12px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s ease-in-out;
+            box-sizing: border-box;
+        }
+
+        /* Interactive Theme Control Layout */
+        .theme-selector-panel {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 650px;
+            box-sizing: border-box;
+        }
+        .theme-selector-panel span {
+            font-family: sans-serif;
+            font-weight: bold;
+            margin-right: 10px;
+            color: #333;
+        }
+        .theme-btn {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s ease;
+        }
+        .theme-btn:active { transform: scale(0.95); }
+        
+        /* Individual Theme Control Buttons Custom Colors */
+        #btn-tech { background-color: #3b82f6; color: white; }
+        #btn-vintage { background-color: #8b5a2b; color: white; }
+        #btn-cyber { background-color: #06b6d4; color: #000; }
+
+
+        /* ========================================================
+           EXPERIMENT 8: SELECTOR MECHANICS STYLING ATTRIBUTES
+           ======================================================== */
+        h1 { 
+            font-size: 28px;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+        .highlight-box { 
+            padding: 15px 20px; 
+            margin: 25px 0;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        #unique-footer { 
+            font-size: 11px; 
+            text-align: center;
+            margin-top: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+        /* ========================================================
+           EXPERIMENT 9: HYPERLINK PSEUDO-CLASSES STATE MATRIX
+           ======================================================== */
+        .navigation-link:link { text-decoration: none; font-weight: bold; }
+        .navigation-link:visited { color: #7c3aed; }
+        .navigation-link:hover { color: #dc2626; text-decoration: underline; }
+        .navigation-link:active { color: #ea580c; }
+        .link-container { padding: 15px; border-radius: 6px; text-align: center; margin-top: 20px; background: rgba(0,0,0,0.04); }
+
+
+        /* ========================================================
+           THEME DEFINITIONS (Swapped dynamically by JavaScript)
+           ======================================================== */
+
+        /* --- THEME 1: MODERN TECH LOOK --- */
+        body.theme-tech {
+            font-family: system-ui, sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1644088379091-d574269d422f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
+            background-repeat: no-repeat; background-position: center; background-attachment: fixed; background-size: cover;
+        }
+        body.theme-tech h1 { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1e3a8a; }
+        body.theme-tech .highlight-box { font-family: 'Arial', sans-serif; background-color: #f8fafc; color: #0f172a; border-left: 5px solid #3b82f6; }
+        body.theme-tech #unique-footer { font-family: monospace; color: #64748b; }
+        body.theme-tech .navigation-link:link { color: #2563eb; }
+
+        /* --- THEME 2: VINTAGE LIBRARY LOOK --- */
+        body.theme-vintage {
+            font-family: 'Georgia', serif;
+            background-image: url('https://images.unsplash.com/photo-1722182877533-7378b60bf1e8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
+            background-repeat: no-repeat; background-position: center; background-attachment: fixed; background-size: cover;
+        }
+        body.theme-vintage .showcase-card { background-color: rgba(253, 251, 247, 0.95); color: #2c1810; }
+        body.theme-vintage h1 { font-family: 'Palatino', Garamond, serif; font-style: italic; color: #4a2c11; border-bottom-color: rgba(74, 44, 17, 0.2); }
+        body.theme-vintage .highlight-box { font-family: 'Georgia', serif; background-color: #fdfbf7; color: #4a2c11; border: 1px dashed #8b5a2b; border-left: 5px solid #8b5a2b; }
+        body.theme-vintage #unique-footer { font-family: 'Arial', sans-serif; color: #7a6b58; }
+        body.theme-vintage .navigation-link:link { color: #8b5a2b; }
+
+        /* --- THEME 3: CYBER DETROIT DARK LOOK --- */
+        body.theme-cyber {
+            font-family: 'Courier New', monospace;
+            background-image: url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
+            background-repeat: no-repeat; background-position: center; background-attachment: fixed; background-size: cover;
+        }
+        body.theme-cyber .showcase-card { background-color: rgba(11, 15, 25, 0.9); color: #e2e8f0; box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2); }
+        body.theme-cyber h1 { font-family: 'Impact', sans-serif; letter-spacing: 2px; color: #38bdf8; border-bottom-color: rgba(56, 189, 248, 0.2); }
+        body.theme-cyber .highlight-box { font-family: monospace; background-color: #0f172a; color: #22d3ee; border: 1px solid #06b6d4; }
+        body.theme-cyber #unique-footer { font-family: sans-serif; color: #475569; }
+        body.theme-cyber .navigation-link:link { color: #06b6d4; }
+    </style>
+</head>
+<!-- Starts on the modern tech theme by default -->
+<body class="theme-tech">
+
+    <!-- Sticky Theme Selector Toolbar Grid Menu -->
+    <div class="theme-selector-panel">
+        <span>🎨 Select Lab Design Theme:</span>
+        <button id="btn-tech" class="theme-btn" onclick="switchTheme('theme-tech')">Modern Tech</button>
+        <button id="btn-vintage" class="theme-btn" onclick="switchTheme('theme-vintage')">Vintage Library</button>
+        <button id="btn-cyber" class="theme-btn" onclick="switchTheme('theme-cyber')">Cyber Mode</button>
+    </div>
+
+    <!-- Main Dynamic Showcase Display Card Container -->
+    <div class="showcase-card">
+        
+        <!-- Tag Selector Mapping Target -->
+        <h1>CSS Engine Showcase</h1>
+        
+        <p>This workspace page demonstrates dynamic presentation sheets mapped using CSS attributes. Click the top buttons above to watch the layout swap values instantly.</p>
+
+        <!-- Class Selector Mapping Target -->
+        <div class="highlight-box">
+            <strong>[CLASS SELECTOR ENFORCED]:</strong> Notice how this block box instantly changes its font family, border orientation style, colors, and paddings whenever a alternative parent layout theme is activated.
+        </div>
+
+        <h3>Interactive Pseudo-Class Test Matrix</h3>
+        <p>Interact with the navigation routing control element path directly below to verify structural state alterations:</p>
+        
+        <div class="link-container">
+            <!-- Pseudo-Classes Mapping Target -->
+            <a href="index.html" class="navigation-link">← Return to Bookstore Homepage</a>
+        </div>
+
+        <!-- ID Selector Mapping Target -->
+        <div id="unique-footer">
+            System Identity Vector Loaded Via Unique ID Rule Mapping
+        </div>
+        
+    </div>
+
+    <!-- Mini Script Engine to handle class swapping logic natively -->
+    <script>
+        function switchTheme(themeName) {
+            // Remove any active theme classes from the body tag wrapper
+            document.body.className = '';
+            
+            // Inject selected theme class flag to rebuild values cleanly
+            document.body.classList.add(themeName);
+        }
+    </script>
+
+</body>
+</html>
